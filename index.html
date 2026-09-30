@@ -69,6 +69,10 @@ footer{text-align:center;padding:3rem 1rem 4rem;color:var(--muted)}
 .band{overflow:hidden;padding:1.2rem 0;background:var(--sun);color:#5a0a33;transform:rotate(-2deg) scale(1.06);margin:0 0 2rem}
 .band div{white-space:nowrap;width:max-content;font-family:Shrikhand,Georgia,serif;font-size:clamp(2rem,7vw,4rem);will-change:transform}
 .note .w{opacity:.25;transition:opacity .6s ease}.note .w.on{opacity:1}
+.vid{display:flex;justify-content:center}.vid video{width:min(360px,100%);max-height:80vh;border-radius:24px;background:#000;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.vid iframe{width:min(325px,100%);height:740px;border:0;border-radius:24px;background:#000}
+.vbtn{display:inline-block;background:var(--sun);color:#5a0a33;text-decoration:none;font-weight:600;font-size:1.15rem;border-radius:999px;padding:1rem 2.2rem;box-shadow:0 5px 0 #b48a00}
+.vbtn:focus-visible{outline:3px solid var(--mint);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -111,6 +115,11 @@ footer{text-align:center;padding:3rem 1rem 4rem;color:var(--muted)}
     <p>I hope this year brings you big wins, good news, and a lot of reasons to laugh until it hurts.</p>
     <p class="sign">Happy birthday, Dina!</p>
   </div>
+</section>
+
+<section>
+  <h2>A video for you</h2>
+  <div class="vid" id="vid"><a class="vbtn" href="https://vt.tiktok.com/ZSbSB1VvR/" target="_blank" rel="noopener">&#9654; Watch your video</a></div>
 </section>
 
 <section>
@@ -170,6 +179,11 @@ footer{text-align:center;padding:3rem 1rem 4rem;color:var(--muted)}
     h.appendChild(b);
   }
   setTimeout(function(){burst(160)},700);
+  var VID='';
+  if(VID){document.getElementById('vid').innerHTML='<iframe src="https://www.tiktok.com/embed/v2/'+VID+'" allowfullscreen allow="encrypted-media" title="Birthday video"></iframe>'}
+  else{var vb=document.getElementById('vid'),v=document.createElement('video');
+    v.controls=true;v.preload='metadata';v.setAttribute('playsinline','');
+    v.onloadedmetadata=function(){vb.innerHTML='';vb.appendChild(v)};v.src='video.mp4'}
   // scroll animations
   var bar=document.getElementById('bar'),h1=document.querySelector('.hero h1'),
       ar=document.querySelector('.ar'),hint=document.querySelector('.hint'),tk=false;
@@ -179,7 +193,7 @@ footer{text-align:center;padding:3rem 1rem 4rem;color:var(--muted)}
     tk=false;
   }
   addEventListener('scroll',function(){if(!tk){tk=true;requestAnimationFrame(onS)}},{passive:true});
-  var els=document.querySelectorAll('h2,.cake,#blow,.wish,.note,footer p,#again'),k=0;
+  var els=document.querySelectorAll('h2,.cake,#blow,.wish,.note,footer p,#again,.vid'),k=0;
   els.forEach(function(e){e.classList.add('rv');if(e.tagName==='H2'||e.classList.contains('note')){e.classList.add(k++%2?'r':'l')}});
   function hearts(){
     for(var i=0;i<14;i++){
